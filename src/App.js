@@ -57,7 +57,7 @@ const App = () => {
     if (output.length >0) {
       const storedOutput = [...output]
       const joinedOutput = storedOutput.join("")
-      const answer = sqrt(joinedOutput)
+      const answer = sqrt(joinedOutput).toFixed(2)
       const strans = answer.toString()
       const splitans = strans.split("")
       setOutput(splitans)
