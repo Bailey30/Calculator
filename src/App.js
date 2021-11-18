@@ -5,13 +5,15 @@ import { evaluate, sqrt, square  } from "mathjs"
 
 const App = () => {
   const [buttons] = useState(["square", "sqrt", "clear", "back", 7, 8, 9, "*", 4, 5, 6, "-", 1, 2, 3, "+", ".", 0, "=", "/"])
-  const [output, setOutput] = useState([])
-  const [btnDisabled, setBtnDisabled] = useState(false)
+  const [output, setOutput] = useState([0])
+  const [sum, setSum] = useState([])
+
+  
+
   const clickHandler = (index, e) => {
     
     if (e.target.innerHTML === "=" && output) {
-      equalsHandler()
-    }
+      equalsHandler() }
     else if ( e.target.innerHTML === "square" ){
       squareHandler()
     } else if (e.target.innerHTML === "sqrt"){
@@ -19,13 +21,24 @@ const App = () => {
     } else if ( e.target.innerHTML === "clear"){
       screenClear()
     } else if (e.target.innerHTML === "back"){
-      backHandler()
+      const storedOutput = [...output]
+      storedOutput.pop()
+      setOutput(storedOutput)
+      const storedSum = [...sum]
+      storedSum.pop()
+      setSum(storedSum)
+    } else if (output === "error") {
+      setOutput("error")
     }
     else {
-      setBtnDisabled(false)
+      
       const storedOutput = [...output]
       storedOutput.push(buttons[index])
       setOutput(storedOutput)
+
+      const storedSum = [...sum]
+      storedSum.push(buttons[index])
+      setSum(storedSum)
     }
   }
   const squareHandler = () => {
@@ -33,29 +46,28 @@ const App = () => {
       const storedOutput = [...output]
       const joinedOutput = storedOutput.join("")
       const answer = square(joinedOutput)
-      console.log(answer);
       const strans = answer.toString()
       const splitans = strans.split("")
+      
       setOutput(splitans)
     }
+    
   }
   const sqrtHandler = () => {
     if (output.length >0) {
       const storedOutput = [...output]
       const joinedOutput = storedOutput.join("")
       const answer = sqrt(joinedOutput)
-      console.log(answer);
       const strans = answer.toString()
       const splitans = strans.split("")
       setOutput(splitans)
     }
   }
   const screenClear = () => {
-    setOutput("")
+    setOutput("0")
+    setSum("")
   }
-  const backHandler = () => {
-
-  }
+  
   const equalsHandler = () => {
     if (output.length > 1) {
       const storedOutput = [...output]
@@ -64,29 +76,30 @@ const App = () => {
       const strans = answer.toString()
       const splitans = strans.split("")
       setOutput(splitans)
+
+      const storedSum = [...sum]
+      storedSum.push(")")
+      storedSum.unshift("(")
+      setSum(storedSum)
     }
   }
 
-
   return (
     <div className="calculator">
-      <div className="screen">{output}</div>
+      <div className="screen">{output}<div className="sum">{sum}</div></div>
+      
       <div className="container">
 
         {buttons.map((button, index) => {
-          return <button disabled={btnDisabled} className="btn" key={index} onClick={(e) => clickHandler(index, e)}>{button}</button>
+          return <button className="btn" key={index} onClick={(e) => clickHandler(index, e)}>{button}</button>
 
         })}
-        {/* <div className="equals" onClick={equalsHandler}>=</div> */}
+        
       </div>
     </div>
   )
 }
 
-// const Button = (clickHandler, props, button) => {
-//   return (
-//     <div className="btn" onClick={clickHandler}>{button}</div>
-//   )
-// }
+
 
 export default App
