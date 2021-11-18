@@ -5,7 +5,7 @@ import { evaluate, sqrt, square  } from "mathjs"
 
 const App = () => {
   const [buttons] = useState(["square", "sqrt", "clear", "back", 7, 8, 9, "*", 4, 5, 6, "-", 1, 2, 3, "+", ".", 0, "=", "/"])
-  const [output, setOutput] = useState([0])
+  const [output, setOutput] = useState([])
   const [sum, setSum] = useState([])
 
   
@@ -64,7 +64,7 @@ const App = () => {
     }
   }
   const screenClear = () => {
-    setOutput("0")
+    setOutput("")
     setSum("")
   }
   
