@@ -8,8 +8,6 @@ const App = () => {
   const [output, setOutput] = useState([])
   const [sum, setSum] = useState([])
 
-  
-
   const clickHandler = (index, e) => {
     
     if (e.target.innerHTML === "=" && output) {
@@ -24,6 +22,7 @@ const App = () => {
       const storedOutput = [...output]
       storedOutput.pop()
       setOutput(storedOutput)
+
       const storedSum = [...sum]
       storedSum.pop()
       setSum(storedSum)
@@ -31,7 +30,6 @@ const App = () => {
       setOutput("error")
     }
     else {
-      
       const storedOutput = [...output]
       storedOutput.push(buttons[index])
       setOutput(storedOutput)
@@ -48,8 +46,11 @@ const App = () => {
       const answer = square(joinedOutput)
       const strans = answer.toString()
       const splitans = strans.split("")
-      
       setOutput(splitans)
+
+      const storedSum = [...sum]
+      storedSum.push("²")
+      setSum(storedSum)
     }
     
   }
@@ -61,6 +62,10 @@ const App = () => {
       const strans = answer.toString()
       const splitans = strans.split("")
       setOutput(splitans)
+
+      const storedSum = [...sum]
+      storedSum.unshift("√")
+      setSum(storedSum)
     }
   }
   const screenClear = () => {
