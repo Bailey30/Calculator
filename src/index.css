@@ -7,7 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Rubik', sans-serif;
-  background-color: #fcefe7;
+  background-color: #fcefe7;margin: 0;
 }
 root {
   width: 100%;

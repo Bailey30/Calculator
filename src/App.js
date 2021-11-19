@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { evaluate, sqrt, square } from "mathjs"
+import {Textfit} from 'react-textfit';
 
 
 const App = () => {
@@ -85,8 +86,10 @@ const App = () => {
 
   return (
     <div className="calculator">
-      <div className="screen">{output}<div className="sum">{sum}</div></div>
-
+      
+    <Textfit mode="single" max="42" min={20}
+className="screen"><div className="num">{output}</div><div className="sum">{sum}</div>
+    </Textfit>
       <div className="container">
 
         {buttons.map((button, index) => {
